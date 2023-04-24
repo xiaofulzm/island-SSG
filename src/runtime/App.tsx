@@ -1,5 +1,6 @@
-import { Layout } from "../theme-default";
+import React from 'react';
+import { Layout } from '../theme-default';
 
-export function App(){
-    return <Layout />;
+export function App() {
+  return <Layout />;
 }

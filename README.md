@@ -74,3 +74,38 @@
 >
 > 因此，SSG 更加适合一些数据变化频率较低的站点，比如文档站、官方站点、博客等等。
 
+## 四: 工具包接入构建方案
+
+>  CJS 模块是通过 require 进行同步加载的，而 ESM 模块是通过 import 异步加载。同步的 require 方法并不能导入 ESM 模块。 
+
+###  常见的库构建方案 :
+
+- Vite/Rollup: 底层使用 Rollup 进行库打包
+- tsup: Esbuild 打包代码，Rollup 和 rollup-plugin-dts 打包 TS 类型
+- unbuild: 原理同 tsup，另外包含 bundleless 模式
+
+> **tsup.config.ts**
+>
+> ```ts
+> 
+> import { defineConfig } from "tsup";
+> 
+> export default defineConfig({
+>     entry:["src/node/cli.ts"],  // 入口文件
+>     bundle:true, // 开启bundle模式
+>     splitting:true, // 开启拆包
+>     outDir:'dist', // 产物目录
+>     format:["cjs","esm"],  // 产物格式
+>     dts:true,  // ts类型文件
+>     // 自动注入一些 API 的 polyfill 代码 
+>     // 如 __dirname, __filename, import.meta 等等，保证这些 API 在 ESM 和 CJS 环境下的兼容性。
+>     shims:true, 
+>     banner: {
+>         js: 'import { createRequire } from "module"; const require = createRequire(import.meta.url);'
+>     }
+> })
+> ```
+>
+> 
+
+## 五: 集成项目的编程规范工具链

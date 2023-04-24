@@ -1,9 +1,11 @@
+
 {
     "compilerOptions": {
         "module": "commonjs",  // 模块格式
         "outDir": "dis",  // 输出目录  
         "rootDir": "src", // 入口目录
         "target": "ESNext", // 指定ECMAScript目标版本
-        "jsx":"react-jsx"
+        "jsx":"react-jsx",
+        "esModuleInterop": true
     }
 }
