@@ -13,6 +13,11 @@
     "bin": {
         "island": "bin/island.js"
     },
+    "lint-staged": {
+        "**/*.{js,jsx,ys,tsx}": [
+            "npm runlint"
+        ]
+    },
     "type": "module",
     "keywords": [],
     "author": "",
