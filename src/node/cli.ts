@@ -1,6 +1,5 @@
 import cac from 'cac';
 import { build } from './build';
-import { createDevServer } from './dev';
 
 const cli = cac('lsland').version('0.0.1').help();
 
@@ -10,10 +9,16 @@ const cli = cac('lsland').version('0.0.1').help();
 
 // 注册子命令
 cli.command('dev [root]', 'start devserver').action(async (root: string) => {
-  const server = await createDevServer(root);
-  await server.listen();
-  server.printUrls();
-  // console.log('dev',root);
+  const createServer = async () => {
+    const { createDevServer } = await import('./dev.js');
+    const server = await createDevServer(root, async () => {
+      await server.close();
+      await createServer();
+    })
+    await server.listen();
+    server.printUrls();
+  }
+  await createServer();
 });
 
 cli

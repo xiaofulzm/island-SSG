@@ -1,7 +1,11 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/node/cli.ts'], // 入口文件
+  entry: [
+    'src/node/cli.ts',  // cli入口
+    'src/node/index.ts', // api入口
+    'src/node/dev.ts',  // dev入口  因为配置(config)文件热更新需要反复调用 所以单独打包
+  ], // 入口文件
   bundle: true, // 开启bundle模式
   splitting: true, // 开启拆包
   outDir: 'dist', // 产物目录
@@ -12,5 +16,6 @@ export default defineConfig({
   shims: true,
   banner: {
     js: 'import { createRequire } from "module"; const require = createRequire(import.meta.url);'
-  }
+  },
+  clean: true  // 清除之前的构建产物
 });

@@ -109,3 +109,26 @@
 > 
 
 ## 五: 集成项目的编程规范工具链
+
+## 六:  搭建单元测试/E2E测试环境
+
+###### 单元测试:
+
+vitest
+
+###### E2E测试
+
+ playwright 
+
+> 1. 创建测试项目
+>    1. e2e项目文件 ( pnpm  init )
+>
+> 2. 启动测试项目
+>    1. 配置文件 playwright.config.ts
+>    2. 脚本运行文件 scripts>>preapre-e2e.ts
+>
+> 3. 开启无头浏览器进行访问 
+>    1. pnpm  prepare:e2e
+
+## 七: 配置文件解析
+
