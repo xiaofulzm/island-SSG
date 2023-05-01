@@ -1,16 +1,14 @@
 // 布局
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Content } from '@runtime';
 
 export function Layout() {
   const [count, setCount] = useState(0);
   return (
     <div>
-      <h1> This is Layout Component 21312</h1>
-      <div>
-        {count}
-        <button onClick={() => setCount(count + 1)}> Add Count </button>
-      </div>
+      <h1> Common Content</h1>
+      <Content />
     </div>
   );
 }

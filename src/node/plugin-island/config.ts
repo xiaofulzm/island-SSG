@@ -1,4 +1,5 @@
-import { relative } from 'path';
+import { PACKAGE_ROOT } from 'node/constants';
+import { join, relative } from 'path';
 import { SiteConfig } from 'shared/types/index';
 import { Plugin } from 'vite';
 import { normalizePath } from 'vite'
@@ -8,7 +9,7 @@ import { normalizePath } from 'vite'
 
 const SITE_DATA_ID = 'island:site-data'; // 虚拟模块id
 
-export function plugConfig(config: SiteConfig, restart: () => Promise<void>): Plugin {
+export function plugConfig(config: SiteConfig, restartServe?: () => Promise<void>): Plugin {
   return {
     name: 'island:site-data',
     resolveId(id) {
@@ -22,13 +23,22 @@ export function plugConfig(config: SiteConfig, restart: () => Promise<void>): Pl
         return `export default ${JSON.stringify(config.siteData)}`;
       }
     },
+    config() {
+      return {
+        resolve: {
+          alias: {
+            '@runtime': join(PACKAGE_ROOT, 'src', 'runtime', 'index.ts')
+          }
+        }
+      }
+    },
     async handleHotUpdate(ctx) {
-      console.log('123')
+      // console.log('123')
       // 配置文件的热更新
-      console.log(normalizePath(config.configPath))
+      // console.log(normalizePath(config.configPath))
       const customWatchedFiles = [normalizePath(config.configPath)]; // 配置文件地址
       const include = (id: string) => customWatchedFiles.some((file) => id.includes(file));
-      console.log(config.configPath);
+      // console.log(config.configPath);
       if (include(ctx.file)) {
         console.log(
           `\n${relative(config.root, ctx.file)} changed, restarting server...`
@@ -38,7 +48,7 @@ export function plugConfig(config: SiteConfig, restart: () => Promise<void>): Pl
         // 1. 插件内重启 vite的 devserver
         // X 没有作用 因为并没有进行island 框架配置的重新读取
         // 2. 手动调用 dev.ts 中的 createServer
-        await restart();
+        await restartServe();
       }
     }
   }

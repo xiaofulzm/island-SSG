@@ -1,6 +1,8 @@
 import cac from 'cac';
 import { build } from './build';
 
+import { resolveConfig } from './config';
+
 const cli = cac('lsland').version('0.0.1').help();
 
 // 1. bin 字段
@@ -24,8 +26,9 @@ cli.command('dev [root]', 'start devserver').action(async (root: string) => {
 cli
   .command('build [root]', 'build in production')
   .action(async (root: string) => {
-    console.log('build', root);
-    await build(root);
+    // console.log('build', root);
+    const config = await resolveConfig(root, 'build', 'production')
+    await build(root, config);
   });
 
 cli.parse(); // 全局解析 传入的参数

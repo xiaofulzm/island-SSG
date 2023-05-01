@@ -3,8 +3,12 @@
 import { join } from 'path';
 import fs from 'fs-extra';
 import { pathToFileURL } from 'url';
+import { SiteConfig } from 'shared/types';
 
 import { build as viteBuild, InlineConfig } from 'vite';
+
+import { createVitePlugins } from './vitePlugins';
+
 import {
   SERVER_ENTRN_PATH,
   CLIENT_ENTRN_PATH,
@@ -13,18 +17,17 @@ import {
 import type { RollupOutput } from 'rollup';
 // import AutoImport from 'unplugin-auto-import/vite';
 // import ora from 'ora';
-export async function bundle(root: string) {
+export async function bundle(root: string, config: SiteConfig) {
   // 打包函数
   // isServer true:服务端  fasle:客户端
   const resolveViteConfig = (isServer: boolean): InlineConfig => {
     return {
       mode: 'production',
       root,
-      // plugins:[
-      //     AutoImport({
-      //         imports:['react'],
-      //     }),
-      // ],
+      plugins: createVitePlugins(config),
+      ssr: {
+        noExternal: ['react-router-dom']
+      },
       build: {
         ssr: isServer,
         outDir: isServer ? '.temp' : 'build',
@@ -87,9 +90,9 @@ export async function renderPage(
   await fs.remove(join(root, '.temp')); // 删除ssr 构建产物
 }
 
-export async function build(root: string) {
+export async function build(root: string = process.cwd(), config: SiteConfig) {
   // 1.  bundle - client端  + server端
-  const [clientBundle] = await bundle(root);
+  const [clientBundle] = await bundle(root, config);
   // 2. 引入server-entry 模块
   const serverEntryPath = join(PACKAGE_ROOT, root, '.temp', 'ssr-entry.cjs');
   // 3. 服务端渲染 产出HTML

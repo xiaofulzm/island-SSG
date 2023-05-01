@@ -67,7 +67,7 @@ export async function resolveConfig(
   mode: 'production' | 'development'
 ) {
   const [configPath, userConfig] = await resolveUserConfig(root, command, mode);
-  console.log(configPath)
+  // console.log(configPath)
   const siteConfig: SiteConfig = {
     root,
     configPath,

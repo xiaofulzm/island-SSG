@@ -132,3 +132,17 @@ vitest
 
 ## 七: 配置文件解析
 
+## 八: 约定路由
+
+## 九: MDX编译: 整体工具链及生态介绍 
+
+ ![image.png](README.assets/81072beae7e34423a85bd5355028879c_tplv-k3u1fbpfcp-zoom-in-crop-mark_3024_0_0_0.webp) 
+
+1. ATS(抽象语法树)解析
+2. AST转换
+3. AST生成代码
+
+> ###### MDX? 
+>
+> 1.  同时支持Markdown和JSX的语法
+
