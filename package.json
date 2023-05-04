@@ -9,7 +9,7 @@
     "preview": "cd build && serve .",
     "lint": "eslint --fix --ext .ts,.tsx,.js.jsx ./",
     "prepare": "husky install",
-    "test:unit": "vitest --ui",
+    "test:unit": "vitest",
     "test:e2e": " playwright test",
     "prepare:e2e": " tsx scripts/prepare-e2e.ts"
   },
@@ -30,6 +30,7 @@
     "@commitlint/config-conventional": "^17.6.1",
     "@playwright/test": "1.26.1",
     "@types/fs-extra": "^9.0.13",
+    "@types/hast": "^2.3.4",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
@@ -48,6 +49,7 @@
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
     "typescript": "^5.0.3",
+    "unist-util-visit": "^4.1.2",
     "unplugin-auto-import": "^0.15.3",
     "vitest": "^0.30.1"
   },
