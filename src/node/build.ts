@@ -20,11 +20,11 @@ import type { RollupOutput } from 'rollup';
 export async function bundle(root: string, config: SiteConfig) {
   // 打包函数
   // isServer true:服务端  fasle:客户端
-  const resolveViteConfig = (isServer: boolean): InlineConfig => {
+  const resolveViteConfig = async (isServer: boolean): Promise<InlineConfig> => {
     return {
       mode: 'production',
       root,
-      plugins: createVitePlugins(config),
+      plugins: await createVitePlugins(config),
       ssr: {
         noExternal: ['react-router-dom']
       },
@@ -45,11 +45,11 @@ export async function bundle(root: string, config: SiteConfig) {
   try {
     // 客户端打包
     const clientBuild = async () => {
-      return viteBuild(resolveViteConfig(false));
+      return viteBuild(await resolveViteConfig(false));
     };
     // 服务端打包
     const serverBuild = async () => {
-      return viteBuild(resolveViteConfig(true));
+      return viteBuild(await resolveViteConfig(true));
     };
     // 并行执行
     const [clientBundle, serverBundle] = await Promise.all([

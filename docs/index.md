@@ -2,6 +2,12 @@
 title: 'island'
 ---
 
+```ts
+import { join } from 'path';
+import fs from 'fs-extra';
+import { pathToFileURL } from 'url';
+import { SiteConfig } from 'shared/types';
+```
 
 # 小夫
 
