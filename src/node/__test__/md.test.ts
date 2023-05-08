@@ -5,10 +5,16 @@
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';  // 解析markdown
 import remarkRehype from 'remark-rehype'; // 将markdownAST解析为HATMLAST
+import remarkMdx from 'remark-mdx';
+import remarkStringify from 'remark-stringify';
 import rehypeStringify from 'rehype-stringify'; // 将HTMLAST转化为HTMl字符串 输出
 import { rehypePluginPreWrapper } from '../plugin-mdx/rehypePlugins/preWrapper';
 import { rehypePluginShiki } from '../plugin-mdx/rehypePlugins/shiki';
+import { remarkPluginToc } from '../plugin-mdx/remarkPlugins/toc';
+
 import shiki from 'shiki';
+
+
 
 import { describe, expect, test } from "vitest";
 
@@ -48,5 +54,22 @@ describe("Markdown compile cases", async () => {
       <span class=\\"line\\"></span></code></pre></div>"
     `);
   })
+
+  test('Compile TOC', async () => {
+    const remarkProcessor = unified()
+      .use(remarkParse)
+      .use(remarkMdx)
+      .use(remarkPluginToc)
+      .use(remarkStringify);
+    const mdContent = '## title `xxx` [link](/path)';
+    const result = remarkProcessor.processSync(mdContent);
+    expect(result.value.toString().replace(mdContent, '')).toMatchInlineSnapshot(`
+      "
+
+      export const toc = [{\\"id\\":\\"title-xxx-link\\",\\"text\\":\\"title xxx link\\",\\"depth\\":2}]
+      "
+    `);
+  })
+
 
 })

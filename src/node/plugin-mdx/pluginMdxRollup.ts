@@ -8,6 +8,7 @@ import remarkPluginFrontmatter from 'remark-frontmatter';
 import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper';
 import { rehypePluginShiki } from './rehypePlugins/shiki';
 import shiki from "shiki";
+import { remarkPluginToc } from './remarkPlugins/toc';
 
 
 export async function pluginMdxRollup() {
@@ -16,7 +17,7 @@ export async function pluginMdxRollup() {
       remarkGfm,
       remarkPluginFrontmatter,  //  解析元信息
       [remarkPluginMDXFrontMatter, { name: 'frontmatter' }], //  解析元信息
-
+      remarkPluginToc,
     ],
     rehypePlugins: [
       rehypePluginSlug,  // 生成锚点, 增加锚点链接
