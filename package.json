@@ -47,7 +47,6 @@
     "ora": "^6.3.0",
     "remark-mdx": "^2.3.0",
     "remark-stringify": "^10.0.2",
-    "rollup": "^3.20.2",
     "serve": "^14.0.1",
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
@@ -81,8 +80,9 @@
     "remark-mdx-frontmatter": "^3.0.0",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
+    "rollup": "3.2.3",
     "shiki": "^0.14.2",
     "unified": "^10.1.2",
-    "vite": "^4.2.1"
+    "vite": "3.1.4"
   }
 }
