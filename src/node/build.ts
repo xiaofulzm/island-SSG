@@ -1,6 +1,6 @@
 // 生产环境  构建
 
-import { join } from 'path';
+import { dirname, join } from 'path';
 import fs from 'fs-extra';
 import { pathToFileURL } from 'url';
 import { SiteConfig } from 'shared/types';
@@ -15,8 +15,13 @@ import {
   PACKAGE_ROOT
 } from './constants';
 import type { RollupOutput } from 'rollup';
+import { Route } from './plugin-routes/index';
+
+
 // import AutoImport from 'unplugin-auto-import/vite';
 // import ora from 'ora';
+
+
 export async function bundle(root: string, config: SiteConfig) {
   // 打包函数
   // isServer true:服务端  fasle:客户端
@@ -30,7 +35,7 @@ export async function bundle(root: string, config: SiteConfig) {
       },
       build: {
         ssr: isServer,
-        outDir: isServer ? '.temp' : 'build',
+        outDir: isServer ? '.temp' : join(root,'build'),
         rollupOptions: {
           input: isServer ? SERVER_ENTRN_PATH : CLIENT_ENTRN_PATH,
           output: {
@@ -63,30 +68,40 @@ export async function bundle(root: string, config: SiteConfig) {
 }
 
 export async function renderPage(
-  render: () => string,
+  render: (pagePath:string) => string,
   root: string,
-  clientBundle: RollupOutput
+  clientBundle: RollupOutput,
+  routes:Route[]
 ) {
-  const appHtml = render();
   const clientChunk = clientBundle.output.find(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry
   );
-  const html = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-        <body>
-            <div id="root" >${appHtml}</div>
-            <script src="/${clientChunk?.fileName}"  type="module"></script>
-        </body>
-        </html>
-    `.trim();
-  await fs.writeFile(join(root, 'build', 'index.html'), html); // 写入文件
+
+  // 多路由打包
+  await  Promise.all(
+     routes.map(async (route)=>{
+       const routePath = route.path;
+       const appHtml = render(routePath);
+       const html = `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Document</title>
+          </head>
+          <body>
+              <div id="root" >${appHtml}</div>
+              <script src="/${clientChunk?.fileName}"  type="module"></script>
+          </body>
+          </html>
+      `.trim();
+      const fileName = routePath.endsWith('/')?`${routePath}index.html`:`${routePath}.html`;
+      await fs.ensureDir(join(root,'build',dirname(fileName)));
+      await fs.writeFile(join(root,'build',fileName),html); // 写入文件
+     })
+  )
   await fs.remove(join(root, '.temp')); // 删除ssr 构建产物
 }
 
@@ -96,8 +111,8 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
   // 2. 引入server-entry 模块
   const serverEntryPath = join(PACKAGE_ROOT, root, '.temp', 'ssr-entry.cjs');
   // 3. 服务端渲染 产出HTML
-  const { render } = await import(pathToFileURL(serverEntryPath).toString());
+  const { render,routes } = await import(pathToFileURL(serverEntryPath).toString());
   // const { render } = await import(serverEntryPath);
 
-  await renderPage(render, root, clientBundle);
+  await renderPage(render, root, clientBundle,routes);
 }
