@@ -20,8 +20,8 @@ module.exports = {
     quotes: ['error', 'single'],  // 单引号
     semi: ['error', 'always'],    // 分号
     'react/react-in-jsx-scope': 'off', // react配置
-    'endOfLine': 'auto'
-
+    'endOfLine': 'auto',
+    'react/no-unknown-property': 'off'
   },
   settings: {  // 自动探测react版本号
     react: {

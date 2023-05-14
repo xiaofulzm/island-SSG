@@ -6,3 +6,7 @@ dist
 bin
 esm-cjs
 docs
+e2e
+.temp
+scripts
+*.d.ts

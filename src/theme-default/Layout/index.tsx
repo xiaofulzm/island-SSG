@@ -1,13 +1,12 @@
 // 布局
 
-import { useState } from 'react';
 import { Content } from '@runtime';
+import 'uno.css'
 
 export function Layout() {
-  const [count, setCount] = useState(0);
   return (
     <div>
-      <h1> Common Content</h1>
+      <h1 p='2' m='2' className='text-red' > Common Content</h1>
       <Content />
     </div>
   );
