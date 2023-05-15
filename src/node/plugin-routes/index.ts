@@ -2,12 +2,13 @@
 // 生成约定式路由
 import { Plugin } from 'vite';
 import { RouteService } from './RouteSerive';
-
+import { PageModule } from 'shared/types';
 
 export interface Route {
   path: string;
   element: React.ReactElement;
   filePath: string;
+  preload:()=>Promise<PageModule>
 }
 
 interface PluginOptions {

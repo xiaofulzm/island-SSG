@@ -1,5 +1,6 @@
 
-
+import { type } from "os";
+import { ComponentType } from "react";
 import { UserConfig as ViteConfiguration } from "vite";
 
 // 导航栏类型
@@ -52,4 +53,37 @@ export interface SiteConfig {
   root: string,
   configPath: string,
   siteData: UserConfig
+}
+
+
+// 页面数据
+export interface PageData {
+  siteData:UserConfig;   // 站点信息
+  pagePath:string;  // 当前路由
+  frontmatter:Frontmatter;  // 页面的的源数据
+  pageType?:PageType;
+  toc?:Header[]
+}
+
+// 页面类型
+export type PageType = 'home' | 'doc'|'custom'|'404';
+
+export interface Frontmatter{
+  title?:string;
+  description?:string;
+  pageType?:PageType;  // 页面类型
+  Sidebar?:boolean;  // 侧边栏是否展示
+  outLine?:boolean;  // 大纲栏是否展示
+}
+
+export interface Header {
+  id:string;
+  text:string;
+  depth:number
+}
+
+export interface PageModule{
+  default: ComponentType;
+  frontmatter?:Frontmatter;  // 页面的的源数据
+  [key:string]: unknown;
 }
