@@ -25,9 +25,15 @@ export function plugConfig(config: SiteConfig, restartServe?: () => Promise<void
     },
     config() {
       return {
+        root: PACKAGE_ROOT,
         resolve: {
           alias: {
             '@runtime': join(PACKAGE_ROOT, 'src', 'runtime', 'index.ts')
+          }
+        },
+        css:{
+          modules:{
+            localsConvention:'camelCase'
           }
         }
       }

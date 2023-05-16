@@ -28,6 +28,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
+    "@iconify-json/carbon": "^1.1.16",
     "@playwright/test": "1.26.1",
     "@types/fs-extra": "^9.0.13",
     "@types/hast": "^2.3.4",
@@ -47,6 +48,7 @@
     "ora": "^6.3.0",
     "remark-mdx": "^2.3.0",
     "remark-stringify": "^10.0.2",
+    "sass": "^1.62.1",
     "serve": "^14.0.1",
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",

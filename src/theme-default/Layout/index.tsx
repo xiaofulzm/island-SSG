@@ -1,7 +1,14 @@
 // 布局
 
+
 import {usePageData  } from '@runtime';
-import 'uno.css'
+
+import { Nav } from '../components/Nav';
+
+import "../styles/base.css";
+import "../styles/vars.css";
+import 'uno.css';
+
 
 export function Layout() {
 
@@ -22,8 +29,7 @@ export function Layout() {
 
   return (
     <div>
-      <div>nav</div>
-      {getContent()}
+      <Nav />
     </div>
   );
 }
