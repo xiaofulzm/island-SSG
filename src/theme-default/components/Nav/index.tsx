@@ -2,6 +2,9 @@
 import { usePageData } from "@runtime"
 import { NavItemWithLink } from "shared/types";
 
+
+import { SwitchAppearance } from "../SwitchAppearance";
+
 import styles from "./index.module.scss";
 
 function MenuItem (item:NavItemWithLink){
@@ -28,7 +31,7 @@ export  function Nav() {
                     Island.js
                 </a>
             </div>
-            <div flex="~" >
+            <div  flex="~" >
                 <div flex="~" >
                     {
                         nav.map(item=>(
@@ -36,8 +39,10 @@ export  function Nav() {
                         ))
                     }
                 </div>
-                {/* <div>主题切换</div> */}
-                <div className={styles.socialLinkIcon} > 
+                <div flex="~" before='menu-item-before' >
+                    <SwitchAppearance></SwitchAppearance>
+                </div>
+                <div className={styles.socialLinkIcon} before='menu-item-before' ml="2" > 
                     <a>
                         <div className="i-carbon-logo-github w-5 h-5 fill-current" ></div>
                     </a>
