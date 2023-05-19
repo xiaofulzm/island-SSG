@@ -68,12 +68,36 @@ export interface PageData {
 // 页面类型
 export type PageType = 'home' | 'doc'|'custom'|'404';
 
+
+export interface Feature{
+  icon:string;
+  title:string;
+  details:string;
+}
+
+export interface Hero{
+  name:string;
+  text:string;
+  tagline:string;
+  image?:{
+    src:string;
+    alt:string;
+  };
+  actions:{
+    text:string;
+    link:string;
+    theme:'brand' | 'alt';
+  }[];
+}
+
 export interface Frontmatter{
   title?:string;
   description?:string;
   pageType?:PageType;  // 页面类型
   Sidebar?:boolean;  // 侧边栏是否展示
   outLine?:boolean;  // 大纲栏是否展示
+  features?:Feature[];
+  hero?:Hero;
 }
 
 export interface Header {
