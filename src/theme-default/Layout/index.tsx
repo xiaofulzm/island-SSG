@@ -5,9 +5,11 @@ import {usePageData  } from '@runtime';
 
 import { Nav } from '../components/Nav';
 import  {HomeLayout}  from './HomeLayout';
+import { DocLayout } from './DocLayout';
 
 import "../styles/base.css";
 import "../styles/vars.css";
+import "../styles/doc.css";
 import 'uno.css';
 
 
@@ -20,7 +22,7 @@ export function Layout() {
     if(pageType === 'home'){
       return <HomeLayout />
     }else if (pageType === 'doc'){
-      return <div>正文内容</div>
+      return <DocLayout />
     }else{
       return <div>404</div>
     }
@@ -31,7 +33,7 @@ export function Layout() {
   return (
     <div>
       <Nav />
-      {getContent()}
+      <section style={{paddingTop:'var(--island-nav-heigth)'}} >{getContent()}</section>
     </div>
   );
 }

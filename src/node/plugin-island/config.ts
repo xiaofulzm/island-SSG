@@ -3,6 +3,8 @@ import { join, relative } from 'path';
 import { SiteConfig } from 'shared/types/index';
 import { Plugin } from 'vite';
 import { normalizePath } from 'vite'
+import sirv from 'sirv';
+
 // vite 插件
 // 让前端能够访问到 config 配置的数据
 // 虚拟模块
@@ -56,6 +58,10 @@ export function plugConfig(config: SiteConfig, restartServe?: () => Promise<void
         // 2. 手动调用 dev.ts 中的 createServer
         await restartServe();
       }
+    },
+    configureServer(server){
+      const publicDir =  join(config.root,'public');
+      server.middlewares.use(sirv(publicDir))
     }
   }
 }
