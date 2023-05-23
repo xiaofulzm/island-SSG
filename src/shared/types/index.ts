@@ -109,5 +109,6 @@ export interface Header {
 export interface PageModule{
   default: ComponentType;
   frontmatter?:Frontmatter;  // 页面的的源数据
+  toc?:Header[];
   [key:string]: unknown;
 }
