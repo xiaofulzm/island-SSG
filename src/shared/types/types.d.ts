@@ -1,5 +1,7 @@
 // 全局的类型声明
 
+/// <reference types="vite/client" />
+
 // 声明模块
 declare module 'island:site-data' {
   import type { UserConfig } from "shared/types";
@@ -12,7 +14,3 @@ declare module 'island:routes' {
   export const routes: Route[];
 }
 
-declare module '*.module.scss'{
-    const classes: { [key:string]:string};
-    export default classes
-}

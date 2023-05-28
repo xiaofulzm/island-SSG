@@ -7,8 +7,7 @@ import { Aside } from "../../components/Aside";
 import styles from "./index.module.scss";
 
 export function DocLayout() {
-    console.log(usePageData());
-    
+                  
     const { siteData,toc } = usePageData();
     const sidebarData = siteData.themeConfig?.sidebar || {};
     const { pathname } =  useLocation();
