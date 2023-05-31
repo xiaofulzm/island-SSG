@@ -15,10 +15,6 @@ const toc = [{
   "text": "\u4E0A\u624B\u4F53\u9A8C",
   "depth": 2
 }, {
-  "id": "lzmsadsa",
-  "text": "lzmsadsa",
-  "depth": 2
-}, {
   "id": "\u4F18\u52A3\u52BF\u5206\u6790",
   "text": "\u4F18\u52A3\u52BF\u5206\u6790",
   "depth": 2
@@ -91,13 +87,6 @@ function _createMdxContent(props) {
         href: "#\u4E0A\u624B\u4F53\u9A8C",
         children: "#"
       }), "\u4E0A\u624B\u4F53\u9A8C"]
-    }), "\n", ssrEntry.jsxs(_components.h2, {
-      id: "lzmsadsa",
-      children: [ssrEntry.jsx(_components.a, {
-        className: "header-anchor",
-        href: "#lzmsadsa",
-        children: "#"
-      }), "lzmsadsa"]
     }), "\n", ssrEntry.jsx(_components.p, {
       children: "\u5728\u4F7F\u7528 Fresh \u4E4B\u524D\uFF0C\u9700\u8981\u5728\u673A\u5668\u4E0A\u5148\u5B89\u88C5 Deno:"
     }), "\n", ssrEntry.jsx(_components.p, {

@@ -35,7 +35,7 @@ export async function bundle(root: string, config: SiteConfig) {
       },
       build: {
         ssr: isServer,
-        outDir: isServer ? '.temp' : join(root,'build'),
+        outDir: isServer ? join(root, '.temp') : join(root,'build'),
         rollupOptions: {
           input: isServer ? SERVER_ENTRN_PATH : CLIENT_ENTRN_PATH,
           output: {
@@ -102,7 +102,7 @@ export async function renderPage(
       await fs.writeFile(join(root,'build',fileName),html); // 写入文件
      })
   )
-  await fs.remove(join(root, '.temp')); // 删除ssr 构建产物
+  // await fs.remove(join(root, '.temp')); // 删除ssr 构建产物
 }
 
 export async function build(root: string = process.cwd(), config: SiteConfig) {

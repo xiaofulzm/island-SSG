@@ -7,7 +7,7 @@ export function useHeader (initHeaders: Header[]){
     useEffect(()=>{
         if(import.meta.env.DEV){
             import.meta.hot.on('mdx-changed',({filePath}:{filePath:string})=>{
-                import( /* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then((module)=>{
+                import(/* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then((module)=>{
                     setHeaders(module.toc);
                 })
             })

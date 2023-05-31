@@ -752,42 +752,42 @@ var AwaitRenderStatus;
 })(AwaitRenderStatus || (AwaitRenderStatus = {}));
 new Promise(() => {
 });
-const Route0 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/b.614cf033.cjs")));
-const Route1 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/a.0005d07b.cjs")));
-const Route2 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/b.2a59a06f.cjs")));
-const Route3 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/c.a8edb9b4.cjs")));
-const Route4 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/index.50f6fb7f.cjs")));
-const Route5 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/index.c811a3f7.cjs")));
+const Route0 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/b.82d59f6e.cjs")));
+const Route1 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/a.d966ca7b.cjs")));
+const Route2 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/b.7b428698.cjs")));
+const Route3 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/c.4a5543b1.cjs")));
+const Route4 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/index.69b95334.cjs")));
+const Route5 = loadable__default.default(() => Promise.resolve().then(() => require("./assets/index.f0701648.cjs")));
 const routes = [
   {
     path: "/b",
     element: React__default.default.createElement(Route0),
-    preload: () => Promise.resolve().then(() => require("./assets/b.614cf033.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/b.82d59f6e.cjs"))
   },
   {
     path: "/guide/a",
     element: React__default.default.createElement(Route1),
-    preload: () => Promise.resolve().then(() => require("./assets/a.0005d07b.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/a.d966ca7b.cjs"))
   },
   {
     path: "/guide/b",
     element: React__default.default.createElement(Route2),
-    preload: () => Promise.resolve().then(() => require("./assets/b.2a59a06f.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/b.7b428698.cjs"))
   },
   {
     path: "/guide/c",
     element: React__default.default.createElement(Route3),
-    preload: () => Promise.resolve().then(() => require("./assets/c.a8edb9b4.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/c.4a5543b1.cjs"))
   },
   {
     path: "/guide/",
     element: React__default.default.createElement(Route4),
-    preload: () => Promise.resolve().then(() => require("./assets/index.50f6fb7f.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/index.69b95334.cjs"))
   },
   {
     path: "/",
     element: React__default.default.createElement(Route5),
-    preload: () => Promise.resolve().then(() => require("./assets/index.c811a3f7.cjs"))
+    preload: () => Promise.resolve().then(() => require("./assets/index.f0701648.cjs"))
   }
 ];
 const Content = () => {
@@ -880,7 +880,9 @@ const styles$6 = {
   socialLinkIcon,
   nav
 };
-function MenuItem(item) {
+function MenuItem({
+  item
+}) {
   return /* @__PURE__ */ jsx("div", {
     className: "text-sm font-medium mx-3 ",
     children: /* @__PURE__ */ jsx("a", {
@@ -917,10 +919,9 @@ function Nav() {
         flex: "~",
         children: [/* @__PURE__ */ jsx("div", {
           flex: "~",
-          children: nav2.map((item) => /* @__PURE__ */ React.createElement(MenuItem, {
-            ...item,
-            key: item.text
-          }))
+          children: nav2.map((item) => /* @__PURE__ */ jsx(MenuItem, {
+            item
+          }, item.text))
         }), /* @__PURE__ */ jsx("div", {
           flex: "~",
           before: "menu-item-before",
@@ -1613,7 +1614,8 @@ function DocLayout() {
       }), /* @__PURE__ */ jsx("div", {
         className: styles.asideContainer,
         children: /* @__PURE__ */ jsx(Aside, {
-          headers: toc
+          headers: toc,
+          __island: "../../components/Aside!!ISLAND!!E:/Web3.0/study/island-ssg/src/theme-default/Layout/DocLayout/index.tsx"
         })
       })]
     })]
@@ -1733,6 +1735,10 @@ function encodeLocation(to) {
 }
 async function render(pagePath) {
   const pageData = await initPageData(pagePath);
+  const {
+    clearIslandData
+  } = await Promise.resolve().then(() => require("./assets/jsx-runtime.ec991a62.cjs"));
+  clearIslandData();
   return server.renderToString(/* @__PURE__ */ jsx(DataContext.Provider, {
     value: pageData,
     children: /* @__PURE__ */ jsx(StaticRouter, {

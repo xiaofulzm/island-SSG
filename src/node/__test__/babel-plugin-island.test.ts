@@ -17,25 +17,25 @@ describe('babel-plugin-island', ()=>{
     const babelOptions: TransformOptions = {
         filename: IMPORTER_PATH,
         presets: ['@babel/preset-react'],
-        plugins:[ babelPluginIsland]
+        plugins:[babelPluginIsland]
     }
 
     test('Should compile jsx identifier', async () => {
-        const code = `import Aside from '${ISLAND_PATH}'; export default function App() { return <Aside __island />; }`;
+        const code = `import Aside from '${ISLAND_PATH}'; export default function App() {return <Aside __island />; }`;
         const result = await transformAsync(code, babelOptions);
-        expect(result?.code).toContain(
-          `__island: "${ISLAND_PATH}${MASK_SPLITTER}${IMPORTER_PATH}"`
-        );
+        console.log(result,'1');
+        console.log(`__island: "${ISLAND_PATH}${MASK_SPLITTER}${IMPORTER_PATH}"`);
+        
+        expect(result?.code).toContain(`__island: "${ISLAND_PATH}${MASK_SPLITTER}${IMPORTER_PATH}"`);
       });
 
     test('Should compile jsx member expression', async () => {
       const code = `import A from '${ISLAND_PATH}'; export default function App() { return <A.B __island />; }`;
   
       const result = await transformAsync(code, babelOptions);
+      console.log(result,'2');
   
-      expect(result?.code).toContain(
-        `__island: "${ISLAND_PATH}${MASK_SPLITTER}${IMPORTER_PATH}"`
-      );
+      expect(result?.code).toContain(`__island: "${ISLAND_PATH}${MASK_SPLITTER}${IMPORTER_PATH}"`);
     });
 
 })
