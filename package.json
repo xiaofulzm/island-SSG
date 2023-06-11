@@ -7,7 +7,7 @@
     "dev": "tsup --watch",
     "build": "tsup && pnpm build:deps",
     "build:deps": "tsx ./scripts/prebundle.ts",
-    "preview": "cd build && serve .",
+    "preview": "cd ./docs/build && serve .",
     "lint": "eslint --fix --ext .ts,.tsx,.js.jsx ./",
     "prepare": "husky install",
     "test:unit": "vitest",

@@ -98,6 +98,9 @@ async function buildIsland(root: string, islandPathToMap: Record<string,string>)
     const injectId = 'island:inject';
     return viteBuild({
       mode:'production',
+      esbuild:{
+        jsx:'automatic'
+      },
       build:{
         outDir: join(root,'.temp'),
         rollupOptions:{
@@ -169,7 +172,7 @@ export async function renderPage(
               <script type="importmap" >
                 {
                   "imports:{
-                    ${EXTERNALS.map((name)=>`"${name}" : "/${normalizeVendorFilename(name)}.js`).join(',')}
+                    ${EXTERNALS.map((name)=>`"${name}" : "/${normalizeVendorFilename(name)}"`).join(',')}
                   }
                 }
               </script>
